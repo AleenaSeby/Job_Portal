@@ -1,0 +1,58 @@
+<div class="container text-center">
+  <h1 align="center">{{title}}</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="search-hero">
+      <!-- <div class="col-sm-5" style="padding-top:20px;padding-bottom:20px;">
+        <input class="form-control" type="text" placeholder="Search......." [(ngModel)]="filter">
+      </div> -->
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#61442;  Start searching for a hero by id or name or country">
+    </div>
+    <div class="search-hero">Company name<input class="form-control" type="text" [(ngModel)]="companySearch"></div>
+    <div class="search-hero">Experience <input class="form-control" type="text" [(ngModel)]="expSearch"></div>
+    <div class="search-hero">Location <input class="form-control" type="text" [(ngModel)]="locSearch"></div>
+    <div class="search-hero">Skill <input class="form-control" type="text" [(ngModel)]="skillSearch"></div>
+    <h3>{{errorMsg}}</h3>
+    <h3>{{count}}</h3>
+    <div class="container">
+      <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Job title</th>
+            <th>Company name</th>
+            <th>Location</th>
+            <th>Experience</th>
+            <th>Skills</th>
+            <th>Apply Link</th>
+            <!-- <th>Location</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of _jobArray | SearchPipe: expSearch:  locSearch:  skillSearch:  companySearch  | paginate: { itemsPerPage: 5, currentPage: p }  ">
+            <!-- SearchPipe: expSearch:  locSearch:  skillSearch:  companySearch| -->
+            <!-- <td>{{job.title}}</td>
+        <td>{{job.companyname}}</td>
+        <td>{{job.location}}</td> -->
+            <td>{{job.title}}</td>
+            <td>{{job.companyname}}</td>
+            <td>{{job.location}}</td>
+            <td>{{job.experience}}</td>
+            <td>{{job.skills}}</td>
+            <td><a href="">{{job.applylink}}</a></td>
+            <!-- <td>{{job.location}}</td> -->
+          </tr>
+          <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+        </tbody>
+       
+      </table>
+      <ul class="pagination">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </ul>
+      <!-- Angular 8 pagination -->
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator> -->
+    </div>
+  </div>
+</div>
